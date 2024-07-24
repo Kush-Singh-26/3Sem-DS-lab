@@ -1,3 +1,4 @@
+//swpa contents of 2 variables using call by value and call by reference
 #include<stdio.h>
 
 void passByValue(int,int);

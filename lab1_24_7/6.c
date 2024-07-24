@@ -1,3 +1,4 @@
+//create a menu driven program to calculate area of square, rectangle , triangle and circle
 #include <stdio.h>
 
 int rectangle(int *, int *);

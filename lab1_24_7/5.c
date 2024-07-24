@@ -1,3 +1,4 @@
+//calculate simple interest using call by reference
 #include<stdio.h>
 
 int simpleInterest(int *,int *,int *);

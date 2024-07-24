@@ -1,3 +1,4 @@
+// find the largest and the second largest element in the array
 #include<stdio.h>
 int largest(int a[]);
 int secondLargest(int a[]);

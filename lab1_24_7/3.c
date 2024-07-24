@@ -1,3 +1,4 @@
+//display all even numbers first and then odd numbers
 #include<stdio.h>
 void sort(int a[], int n);
 

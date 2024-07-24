@@ -1,3 +1,4 @@
+//find average of array of 10 integers
 #include<stdio.h>
 
 int average(int a[]);
