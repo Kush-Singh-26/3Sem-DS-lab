@@ -1,3 +1,4 @@
+//Create a menu driven program to input an array of 10 integers and then input or delete or search an elementor reverse the array.
 #include <stdio.h>
 
 void insert(int a[],int n, int j, int k);
@@ -27,7 +28,7 @@ int main()
         switch (choice)
         {
         case 1:
-            printf("Enter the index and element to be inserted : ");
+            printf("Enter the position and element to be inserted : ");
             
             scanf("%d %d", &j, &k);
             insert(a,n,j,k);
@@ -35,7 +36,7 @@ int main()
             break;
 
         case 2:
-            printf("Enter the index to be deleted");
+            printf("Enter the position to be deleted");
 
             scanf("%d", &j);
             delete(a,n,j);
@@ -48,8 +49,10 @@ int main()
             scanf("%d", &k);
             int x = search(a,n,k);
             if(x == -1) printf("Not found");
-            else printf("Found at position  : %d\n",x);
+            else printf("Found at position  : %d\n",x+1);
+            printf("\n");
             break;
+
 
         case 4:
             
@@ -70,7 +73,7 @@ int main()
 
 
 void insert(int a[],int n, int j, int k){
-	for(int i =n-1;i>=j;i--)
+	for(int i =n-1;i>=j-1;i--)
 	{
 		a[i+1] = a[i];
 	}
@@ -78,20 +81,14 @@ void insert(int a[],int n, int j, int k){
 }
 void delete(int a[],int n, int j)
 {
-	for(int i = j;i<n-1;i++)
+	for(int i = j-1;i<n-1;i++)
 		a[i] = a[i+1];
 }
 
 int search(int a[],int n, int k)
 {
-	int l =0, h =n-1;
-	int mid;
-	while(l<=h){
-		mid = (l+h)/2;
-		if(mid == k) return mid;
-		else if(mid  <k) l = mid+1;
-		else h = mid -1;
-	}
+	for(int i =0;i<n;i++)
+        if(a[i] == k) return i;
 	return -1;
 }
 

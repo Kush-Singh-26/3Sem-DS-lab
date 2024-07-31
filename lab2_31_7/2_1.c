@@ -1,3 +1,4 @@
+//input and print an array using pointers
 #include<stdio.h>
 int main()
 {
