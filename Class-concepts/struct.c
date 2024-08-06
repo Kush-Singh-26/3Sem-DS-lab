@@ -10,14 +10,21 @@ struct employee
 
 int main()
 {
-    struct employee e1;
-    strcpy(e1.name,"kush");
-    e1.id = 26;
-    e1.salary = 2000000;
+    struct employee e[4];
+    for(int i =0;i<4;i++)
+    {
+        scanf("%s",e[i].name);
+        scanf("%d",&e[i].id);
+        scanf("%f",&e[i].salary);
+    }
 
-    printf("%s ",e1.name);
-    printf("%d ",e1.id);
-    printf("%f", e1.salary);
+    for(int i =0;i<4;i++)
+    {
+        printf("%s ",e[i].name);
+        printf("%d ",e[i].id);
+        printf("%f ",e[i].salary);
+        printf("\n");
+    }
     printf("\n");
     return 0;
 }
