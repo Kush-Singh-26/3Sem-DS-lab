@@ -36,7 +36,7 @@ int main()
             break;
 
         case 2:
-            printf("Enter the position to be deleted");
+            printf("Enter the position to be deleted : ");
 
             scanf("%d", &j);
             delete(a,n,j);
@@ -77,7 +77,7 @@ void insert(int a[],int n, int j, int k){
 	{
 		a[i+1] = a[i];
 	}
-	a[j] = k; 
+	a[j-1] = k; 
 }
 void delete(int a[],int n, int j)
 {
