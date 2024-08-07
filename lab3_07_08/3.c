@@ -6,7 +6,7 @@ int main()
     printf("Enter the number of rows and columns : ");
     scanf("%d%d",&r,&c);
     int a[r][c];
-    printf("Enter the values of the sparse matrix");
+    printf("Enter the values of the sparse matrix\n");
     for(int i =0;i<r;i++)
         for(int j =0;j<c;j++)
             scanf("%d",&a[i][j]);
@@ -34,7 +34,7 @@ int main()
     printf("%d",k);
     printf("\nSparse Matrix : \n");
 
-    for(int i =0;i<=k;k++)
+    for(int i =0;i<=k;i++)
     {
         for(int j =0;j<3;j++)
         {
