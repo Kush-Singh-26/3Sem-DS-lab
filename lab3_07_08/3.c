@@ -1,3 +1,4 @@
+//convert sparse matrix into 3 tuple format
 #include<stdio.h>
 
 int main()
@@ -31,7 +32,6 @@ int main()
     s[0][1] = c;
     s[0][2] = k;
 
-    printf("%d",k);
     printf("\nSparse Matrix : \n");
 
     for(int i =0;i<=k;i++)

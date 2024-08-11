@@ -1,4 +1,4 @@
-//Create a menu driven program to input an array of 10 integers and then input or delete or search an elementor reverse the array.
+//Create a menu driven program to input an array of 10 integers and then input or delete or search an element or reverse the array.
 #include <stdio.h>
 
 void insert(int a[],int n, int j, int k);
@@ -12,6 +12,7 @@ int main()
 	
 	int a[11];
 	int n =10;
+    printf("Enter 10 elements : \n");
 	for(int i = 0;i<10;i++)
 		scanf("%d",&a[i]);
 	

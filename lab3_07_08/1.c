@@ -1,3 +1,4 @@
+//structure employee having id, name , basic slary, phone number. display gross salary = BS + DA(20 % of of BS) + HRA(10%of BS) 
 #include<stdio.h>
 struct employee
 {
@@ -9,12 +10,12 @@ struct employee
 
 int main()
 {
-    struct employee e[5];
-
-    int n =5;
+    printf("Enter the number of employees : ");
+    int n; scanf("%d",&n);
+    struct employee e[n];
     printf("Enter the id, name, basic salary and phone number of 5 employees \n");
 
-    for(int i =0;i<5;i++)
+    for(int i =0;i<n;i++)
     {
         scanf("%d",&e[i].emp_id);
         scanf("%s",e[i].emp_name);
@@ -25,11 +26,12 @@ int main()
     printf("Information of the employees : \n");
     for(int i =0;i<n;i++)
     {
-        printf("Id of employee %d : %d\n",i+1,e[i].emp_id);
-        printf("Name of employee %d : %s\n",i+1,e[i].emp_name);
-        printf("Basic salary of employee %d : %d\n",i+1,e[i].basic_salary);
-        printf("Phone number of employee %d : %d\n",i+1,e[i].ph_no);
-        printf("Gross Salary =  %f\n",e[i].basic_salary+(e[i].basic_salary*0.3));
+        printf("Employee %d :  ",i+1);
+        printf("Id : %d  ",e[i].emp_id);
+        printf("Name : %s  ",e[i].emp_name);
+        printf("Basic salary : %d  ",e[i].basic_salary);
+        printf("Phone number : %d  ",e[i].ph_no);
+        printf("Gross Salary =  %f\n\n",e[i].basic_salary+(e[i].basic_salary*0.3));
 
     }
     return 0;

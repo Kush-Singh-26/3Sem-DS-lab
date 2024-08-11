@@ -1,5 +1,6 @@
 // find the largest and the second largest element in the array
 #include<stdio.h>
+#include<limits.h>
 int largest(int a[]);
 int secondLargest(int a[]);
 
@@ -29,7 +30,7 @@ int largest(int a[])
 int secondLargest(int a[])
 {
 	int largest = a[0];
-	int secondL = a[0];
+	int secondL = INT_MIN;
 	for(int i =1;i<10;i++)
 	{
 		if(a[i]> largest )

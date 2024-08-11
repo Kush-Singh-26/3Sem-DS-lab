@@ -1,3 +1,4 @@
+//structure student having roll no, name, mark 1, mark 2 , mark 3. accept a record of student suing pointer to structure and find the total marks of the student. display the info of student.
 #include <stdio.h>
 #include <stdlib.h>
 
