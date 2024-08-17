@@ -5,20 +5,21 @@ struct node
 {
     int data;
     struct node *next;
-} *start = NULL;
+};
 
-void create_list(int n);
+void create_list(struct node** start, int n);
 
-void print_list();
+void print_list(struct node** start);
 
-void addbegining(int n);
+void addbegining(struct node** start, int n);
 
-void add_after_data(int given, int n);
+void add_after_data(struct node** start, int given, int n);
 
-void add_before_data(int given, int n);
+void add_before_data(struct node** start, int given, int n);
 
 int main()
 {
+    struct node* start = NULL;
     int y = 1;
     int data, choice, given;
     do
@@ -37,29 +38,29 @@ int main()
         case 1:
             printf("Enter data to be entered : ");
             scanf("%d", &data);
-            create_list(data);
+            create_list(&start, data);
             break;
 
         case 2:
-            print_list();
+            print_list(&start);
             break;
 
         case 3:
             printf("Enter data to be entered : ");
             scanf("%d", &data);
-            addbegining(data);
+            addbegining(&start, data);
             break;
 
         case 4:
             printf("Enter the data to be entered and the data value after which the node has to be added: ");
             scanf("%d%d", &data, &given); 
-            add_after_data(given, data);  
+            add_after_data(&start, given, data);  
             break;
         
         case 5:
             printf("Enter the data to be entered and the data value before which the node has to be added : ");
             scanf("%d%d",&data, &given);
-            add_before_data(given,data);
+            add_before_data(&start, given,data);
             break;
             
         case 0:
@@ -72,17 +73,17 @@ int main()
     } while (choice != 0);
 }
 
-void create_list(int n)
+void create_list(struct node** start, int n)
 {
     struct node *ptr = (struct node *)malloc(sizeof(struct node));
 
     ptr->data = n;
     ptr->next = NULL;
-    if (start == NULL)
-        start = ptr;
+    if (*start == NULL)
+        *start = ptr;
     else
     {
-        struct node *temp = start;
+        struct node *temp = *start;
 
         while (temp->next != NULL)
             temp = temp->next;
@@ -90,9 +91,9 @@ void create_list(int n)
     }
 }
 
-void print_list()
+void print_list(struct node** start)
 {
-    if (start == NULL)
+    if (*start == NULL)
     {
         printf("List is Empty.\n");
         return;
@@ -100,7 +101,7 @@ void print_list()
 
     else
     {
-        struct node *temp = start;
+        struct node *temp = *start;
 
         while (temp != NULL)
         {
@@ -112,28 +113,28 @@ void print_list()
     }
 }
 
-void addbegining(int n)
+void addbegining(struct node** start, int n)
 {
     struct node *ptr = (struct node *)malloc(sizeof(struct node));
     ptr->data = n;
-    ptr->next = start;
-    start = ptr;
+    ptr->next = *start;
+    *start = ptr;
 }
 
-void add_after_data(int given, int n)
+void add_after_data(struct node** start, int given, int n)
 {
     struct node *ptr = (struct node *)malloc(sizeof(struct node));
     ptr->data = n;
     ptr->next = NULL;
 
-    if (start == NULL)
+    if (*start == NULL)
     {
         printf("List is empty.\n");
         free(ptr);
         return;
     }
 
-    struct node *temp = start;
+    struct node *temp = *start;
 
     while (temp != NULL && temp->data != given)
     {
@@ -152,21 +153,21 @@ void add_after_data(int given, int n)
     }
 }
 
-void add_before_data(int given, int n)
+void add_before_data(struct node** start, int given, int n)
 {
     struct node *ptr = (struct node *)malloc(sizeof(struct node));
     ptr->data = n;
     ptr->next = NULL;
 
-    if (start == NULL)
+    if (*start == NULL)
     {
         printf("List is empty.\n");
         free(ptr);
         return;
     }
 
-    struct node* temp = start;
-    struct node* q = start;
+    struct node* temp = *start;
+    struct node* q = *start;
 
     while(temp->data != given && temp != NULL)
         {
