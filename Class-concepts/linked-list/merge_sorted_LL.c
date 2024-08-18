@@ -37,7 +37,6 @@ int main()
 
 void create_list(struct node **start)
 {
-    int y = 1;
     int data, choice;
     do
     {
