@@ -7,8 +7,6 @@ struct node
     struct node *next;
 };
 
-struct node *createnode(int data);
-
 void create_list(struct node **start, int n);
 
 void print_list(struct node **start);
