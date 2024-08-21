@@ -95,25 +95,25 @@ int main()
 
         case 8:
             printf("Enter the data value of the node whose next node is to deleted : ");
-            scanf("%d",&given);
-            delete_after(&start,given);
+            scanf("%d", &given);
+            delete_after(&start, given);
             break;
 
         case 9:
-            //reverse(&start);
+            reverse(&start);
             printf("The list is reversed\n");
             break;
 
         case 10:
-            //sort(&start);
+            sort(&start);
             printf("The list is sorted\n");
             break;
-        
+
         case 11:
-            //delete_duplicate(&start);
+            delete_duplicate(&start);
             printf("Duplicate elements deleted\n");
             break;
-        
+
         case 0:
             break;
         default:
@@ -237,25 +237,110 @@ void delete_begining(struct node **start)
     free(temp);
 }
 
-
-void delete_after(struct node** start, int given)
+void delete_after(struct node **start, int given)
 {
-    struct node* temp = *start;
-    while(temp->data != given)
+    struct node *temp = *start;
+    while (temp->data != given)
     {
         temp = temp->next;
     }
     temp->next = temp->next->next;
 }
 
-void delete_last(struct node** start)
+void delete_last(struct node **start)
 {
-    struct node* temp = *start;
-    while(temp->next->next != NULL)
+    struct node *temp = *start;
+    while (temp->next->next != NULL)
     {
         temp = temp->next;
     }
 
     temp->next = NULL;
+}
 
+void reverse(struct node **start)
+{
+    if (*start == NULL)
+    {
+        printf("Empty list\n");
+        return;
+    }
+
+    struct node *currptr = *start;
+    struct node *prevptr = NULL;
+    struct node *nextptr;
+
+    while (currptr != NULL)
+    {
+        nextptr = currptr->next;
+
+        currptr->next = prevptr;
+
+        prevptr = currptr;
+
+        currptr = nextptr;
+    }
+
+    *start = prevptr;
+}
+
+void sort(struct node **start)
+{
+    if (*start == NULL)
+    {
+        printf("Empty list\n");
+        return;
+    }
+
+    struct node *t1 = *start;
+    while (t1 != NULL)
+    {
+        struct node *t2 = t1->next;
+        while (t2 != NULL)
+        {
+            if (t1->data > t2->data)
+            {
+                int temp = t2->data;
+                t2->data = t1->data;
+                t1->data = temp;
+            }
+            t2 = t2->next;
+        }
+        t1 = t1->next;
+    }
+}
+
+void delete_duplicate(struct node **start)
+{
+    struct node *t1 = *start;
+    struct node *prev = NULL;
+
+    while (t1 != NULL)
+    {
+        struct node *t2 = t1->next;
+        while (t2 != NULL)
+        {
+            if (t2->data == t1->data)
+            {
+                struct node *temp = t2;
+                t2 = t2->next;
+                if (prev == NULL)
+                {
+                    *start = temp->next;
+                }
+                else
+                {
+                    prev->next = temp->next;
+                }
+                free(temp);
+            }
+            else
+            {
+                prev = t2;
+                t2 = t2->next;
+            }
+        }
+        t1 = t1->next;
+        prev = NULL;
+    }
 }
