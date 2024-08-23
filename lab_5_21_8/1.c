@@ -240,22 +240,29 @@ void delete_begining(struct node **start)
 void delete_after(struct node **start, int given)
 {
     struct node *temp = *start;
-    while (temp->data != given)
+    while (temp != NULL && temp->data != given)
     {
         temp = temp->next;
     }
+    struct node* t = temp->next;
     temp->next = temp->next->next;
+    free(t);
+
+    
 }
 
 void delete_last(struct node **start)
 {
-    struct node *temp = *start;
-    while (temp->next->next != NULL)
+    struct node *t1 = *start;
+    struct node* t2;
+    while (t1->next != NULL)
     {
-        temp = temp->next;
+        t2 = t1;
+        t1 = t1->next;
     }
 
-    temp->next = NULL;
+    t2->next = NULL;
+    free(t1);
 }
 
 void reverse(struct node **start)
@@ -312,35 +319,31 @@ void sort(struct node **start)
 
 void delete_duplicate(struct node **start)
 {
-    struct node *t1 = *start;
-    struct node *prev = NULL;
+    struct node *t1, *prev, *t2, *temp;
+    t1 = *start;
 
     while (t1 != NULL)
     {
-        struct node *t2 = t1->next;
+        prev = t1;
+        t2 = t1->next;
+
         while (t2 != NULL)
         {
-            if (t2->data == t1->data)
+            if (t1->data == t2->data)
             {
-                struct node *temp = t2;
+                prev->next = t2->next;
+                temp = t2;
                 t2 = t2->next;
-                if (prev == NULL)
-                {
-                    *start = temp->next;
-                }
-                else
-                {
-                    prev->next = temp->next;
-                }
                 free(temp);
             }
+
             else
             {
                 prev = t2;
                 t2 = t2->next;
             }
         }
+
         t1 = t1->next;
-        prev = NULL;
     }
 }
