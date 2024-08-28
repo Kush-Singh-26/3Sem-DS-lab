@@ -25,6 +25,8 @@ void delete_node_before_given_data(struct node **start, int given);
 
 void delete_node_after_given_Data(struct node** start, int given);
 
+void delete_duplicate(struct node** start);
+
 int main()
 {
     struct node *start = NULL;
@@ -39,6 +41,7 @@ int main()
     printf("7. Delete a node of a given data value\n");
     printf("8. Delete node before a given data value\n");
     printf("9. Delete node after a given data value\n");
+    pritnf("10. Delete duplicate elements.\n");
     printf("0. Exit\n");
     do
     {
@@ -94,6 +97,10 @@ int main()
             printf("Enter the data value of the node whose next node is to deleted : ");
             scanf("%d",&given);
             delete_node_after_given_Data(&start, given);
+
+        case 10:
+            delete_duplicate(&start);
+            break;
 
         case 0:
             break;
@@ -245,4 +252,35 @@ void delete_node_after_given_Data(struct node** start, int given)
         temp = temp->next;
     }
     temp->next = temp->next->next;
+}
+
+void delete_duplicate(struct node **start)
+{
+    struct node *t1, *prev, *t2, *temp;
+    t1 = *start;
+
+    while (t1 != NULL)
+    {
+        prev = t1;
+        t2 = t1->next;
+
+        while (t2 != NULL)
+        {
+            if (t1->data == t2->data)
+            {
+                prev->next = t2->next;
+                temp = t2;
+                t2 = t2->next;
+                free(temp);
+            }
+
+            else
+            {
+                prev = t2;
+                t2 = t2->next;
+            }
+        }
+
+        t1 = t1->next;
+    }
 }

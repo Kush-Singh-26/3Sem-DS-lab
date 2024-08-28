@@ -18,6 +18,14 @@ void add_after(struct node** start, int n , int given);
 
 void add_before(struct node** start, int n, int given);
 
+void add_node_beginning(struct node** start, int n);
+
+void delete_first(struct node** start);
+
+void delete_last(struct node** last);
+
+void delete_after(struct node** start, int given);
+
 void reverse_list(struct node* start, struct node* last);
 
 int main()
@@ -31,6 +39,11 @@ int main()
     printf("Enter 4 to add a node after a given data value.\n");
     printf("Enter 5 to add a node before a given data value.\n");
     printf("Enter 6 to reverse the linked list.\n");
+    printf("Enter 7 to add node at begining\n");
+    printf("Enter 8 to delete the node at begining\n");
+    printf("Enter 9 to delete the last node\n");
+    printf("Enter 10 to delete the node after a given node\n");
+
     printf("Enter 0 to exit.\n");
 
     do
@@ -70,6 +83,26 @@ int main()
 
         case 6:
             reverse_list(start,last);
+            break;
+
+        case 7:
+            printf("Enter data to be entered : ");
+            scanf("%d", &data);
+            add_node_beginning(&start, data);
+            break;
+
+        case 8:
+            delete_first(&start);
+            break;
+
+        case 9:
+            delete_last(&last);
+            break;
+
+        case 10:
+            printf("Enter the data value of the node whose next node is to deleted : ");
+            scanf("%d", &given);
+            delete_after(&start, given);
             break;
 
         case 0:
@@ -182,4 +215,40 @@ void reverse_list(struct node* start, struct node* last)
         l = l->prev;
         s = s->next;
     }
+}
+
+void add_node_beginning(struct node** start, int n)
+{
+    struct node* ptr = (struct node*) malloc(sizeof(struct node));
+    ptr->data = n;
+    ptr->prev = NULL;
+    ptr->next = *start;
+    *start = ptr;
+}
+
+void delete_first(struct node** start)
+{
+    struct node* t = *start;
+    *start = (*start)->next;
+    free(t);
+}
+
+void delete_last(struct node** last)
+{
+    struct node*t = *last;
+    *last = (*last)->prev;
+    (*last)->next = NULL;
+    free(t);
+}
+
+void delete_after(struct node** start, int given)
+{
+    struct node *temp = *start;
+    while (temp != NULL && temp->data != given)
+    {
+        temp = temp->next;
+    }
+    struct node* t = temp->next;
+    temp->next = temp->next->next;
+    free(t);    
 }
