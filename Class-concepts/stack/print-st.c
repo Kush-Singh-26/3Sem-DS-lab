@@ -12,10 +12,13 @@ void push(struct stac*, int n);
 
 void pop(struct stac*, int*n);
 
+void display(struct stac*);
+
 int main()
 {
     printf("1. PUSH\n");
     printf("2. POP\n");
+    printf("3. PRINT\n");
     printf("0. EXIT\n");
 
     struct stac S1;
@@ -41,6 +44,11 @@ int main()
                 printf("%d\n",b);
                 break;
             
+            case 3:
+                display(&S1);
+                printf("\n");
+                break;
+
             case 0:
                 break;
             
@@ -82,4 +90,15 @@ void pop(struct stac*S1, int*n)
         *n = S1->st[S1->top];
         (S1->top)--;
     }
+}
+
+void display(struct stac* S1)
+{
+    if(S1->top == -1)
+        return;
+    int b;
+    pop(S1,&b);
+    display(S1);
+    printf("%d ",b);
+    push(S1,b);
 }
