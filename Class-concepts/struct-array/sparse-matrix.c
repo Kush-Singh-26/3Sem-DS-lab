@@ -172,7 +172,8 @@ int main()
     ans[0][1] = s[0][1];
     ans[0][2] = k;
     printf("\n Added matrix is : \n");
-    for (i = 0; i < k; i++)
+    printf("%d %d %d\n",m,n,k-1);
+    for (i = 1; i < k; i++)
     {
         for (j = 0; j < 3; j++)
         {
