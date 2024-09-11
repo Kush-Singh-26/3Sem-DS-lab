@@ -28,8 +28,8 @@ int main()
 
     printf("1. PUSH\n");
     printf("2. POP\n");
-    printf("3. EXIT\n");
-
+    printf("3. DISPLAY\n");
+    printf("0. EXIT");
     
     do
     {
@@ -39,7 +39,7 @@ int main()
         switch(choice)
         {
             case 1:
-                printf("ENter data to be entered : ");
+                printf("Enter data to be entered : ");
                 scanf("%d",&n);
                 push(&s1,n);
                 break;
