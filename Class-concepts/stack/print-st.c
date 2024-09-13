@@ -14,11 +14,14 @@ void pop(struct stac*, int*n);
 
 void display(struct stac*);
 
+void display_temp_st(struct stac* S1);
+
 int main()
 {
     printf("1. PUSH\n");
     printf("2. POP\n");
-    printf("3. PRINT\n");
+    printf("3. PRINT (RECURSIVE)\n");
+    printf("4. PRINT (TEMP. STACK)");
     printf("0. EXIT\n");
 
     struct stac S1;
@@ -46,6 +49,11 @@ int main()
             
             case 3:
                 display(&S1);
+                printf("\n");
+                break;
+
+            case 4:
+                display_temp_st(&S1);
                 printf("\n");
                 break;
 
@@ -101,4 +109,25 @@ void display(struct stac* S1)
     display(S1);
     printf("%d ",b);
     push(S1,b);
+}
+
+void display_temp_st(struct stac* S1)
+{
+    struct stac S2;
+    inititalize(&S2);
+
+    while(S1->top != -1)
+    {
+        int b;
+        pop(S1,&b);
+        push(&S2,b);
+    }
+
+    while(S2.top != -1)
+    {
+        int b;
+        pop(&S2,&b);
+        printf("%d ",b);
+        push(S1,b);
+    }
 }
