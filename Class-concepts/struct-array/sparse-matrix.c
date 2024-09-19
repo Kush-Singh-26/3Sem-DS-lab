@@ -183,3 +183,87 @@ int main()
     }
     return 0;
 }
+
+void convert(int a[][3], int m, int n, int* l, int st[][3]) {
+    *l = 0;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (a[i][j] != 0) {
+                (*l)++;  
+                st[*l][0] = i;
+                st[*l][1] = j;
+                st[*l][2] = a[i][j];
+            }
+        }
+    }
+    st[0][0] = m;  
+    st[0][1] = n;  
+    st[0][2] = *l; 
+}
+
+void add(int* r, int st1[][3], int st2[][3], int st3[][3]) {
+    if (st1[0][0] != st2[0][0] || st1[0][1] != st2[0][1]) {
+        printf("Addition not possible \n");
+        return;
+    }
+
+    int i = 1, j = 1;
+    *r = 0;  
+
+    while (i <= st1[0][2] && j <= st2[0][2]) {
+        if (st1[i][0] == st2[j][0]) {
+            if (st1[i][1] == st2[j][1]) {
+                (*r)++;
+                st3[*r][0] = st1[i][0];
+                st3[*r][1] = st1[i][1];
+                st3[*r][2] = st1[i][2] + st2[j][2];
+                i++;
+                j++;
+            } else if (st1[i][1] < st2[j][1]) {
+                (*r)++;
+                st3[*r][0] = st1[i][0];
+                st3[*r][1] = st1[i][1];
+                st3[*r][2] = st1[i][2];
+                i++;
+            } else {
+                (*r)++;
+                st3[*r][0] = st2[j][0];
+                st3[*r][1] = st2[j][1];
+                st3[*r][2] = st2[j][2];
+                j++;
+            }
+        } else if (st1[i][0] < st2[j][0]) {
+            (*r)++;
+            st3[*r][0] = st1[i][0];
+            st3[*r][1] = st1[i][1];
+            st3[*r][2] = st1[i][2];
+            i++;
+        } else {
+            (*r)++;
+            st3[*r][0] = st2[j][0];
+            st3[*r][1] = st2[j][1];
+            st3[*r][2] = st2[j][2];
+            j++;
+        }
+    }
+
+    while (i <= st1[0][2]) {
+        (*r)++;
+        st3[*r][0] = st1[i][0];
+        st3[*r][1] = st1[i][1];
+        st3[*r][2] = st1[i][2];
+        i++;
+    }
+
+    while (j <= st2[0][2]) {
+        (*r)++;
+        st3[*r][0] = st2[j][0];
+        st3[*r][1] = st2[j][1];
+        st3[*r][2] = st2[j][2];
+        j++;
+    }
+
+    st3[0][0] = st1[0][0];  
+    st3[0][1] = st1[0][1];  
+    st3[0][2] = *r;         
+}
