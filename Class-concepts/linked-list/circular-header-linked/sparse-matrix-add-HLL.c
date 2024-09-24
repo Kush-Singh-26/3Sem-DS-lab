@@ -171,6 +171,7 @@ void add(struct head_node** start_head1,struct data_node** start_data1,struct he
                 t1 = t1->next;
                 t2= t2->next;
             }
+            
             else
             {
                 if(t1->colcor < t2->colcor)
