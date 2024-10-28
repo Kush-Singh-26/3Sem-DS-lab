@@ -48,15 +48,6 @@ int main()
     return 0;
 }
 
-
-/*
-to do :
-preorder's first elemnt = root
-find the preorder elemnt in inorder
-left of the element in inorder = left subtree and right of the element in inorder = right subtree
-*/
-
-
 struct node* buildTree(int* preorder, int* inorder, int start, int end, int* preorderIndex)
 {
     if(start > end) return NULL;
