@@ -69,6 +69,7 @@ Modules:
 
 At a vaccination center, people make a queue. Due to space constraints, parallel queues are formed after the first queue is full, up to three queues. Queue size will be user-defined.
 
+<img src ="./img/img-3.png">
 Modules:
 
 - Implement queue operations (insertion and deletion). When the first person enters the center, all people move one step forward.
@@ -90,7 +91,7 @@ Implement round-robin scheduling using a linked list, where each node represents
 
 ## A-6
 
-Write a program to construct a binary search tree (BST) from a given sequence of **preorder** and **inorder** traversal data.
+Write a program to construct a binary search tree (BST) from a given sequence of **preorder** and **inorder** traversal data.<br> [Solution](/ds-assignment/6.c)
 
 ---
 
