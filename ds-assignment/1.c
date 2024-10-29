@@ -12,7 +12,7 @@ struct Student
     char branch_id[10];
     float cgpa;
     struct Student* next;
-} *Student_head = NULL;
+} *Student_head = NULL, *fail_student_head = NULL;
 
 struct University
 {
@@ -31,6 +31,17 @@ struct Branch
     struct Branch* next;
 } *Branch_head = NULL;
 
+void create_student();
+void create_University();
+void create_Branch();
+
+void capitalize(char * str);
+
+int validate_Unique_rollno(int rollno);
+int validate_Unique_univid(char * univid);
+int validate_Unique_branchid(char * branchid);
+int validate_existing_uni_id(char* univid);
+int validate_existing_branchid(char * branchid);
 
 int main()
 {
@@ -43,6 +54,7 @@ int main()
 void create_student()
 {
     struct Student* ptr = (struct Student*) malloc(sizeof(struct Student));
+    ptr->next = NULL;
 
     printf("Enter the roll number : ");
     scanf("%d",&ptr->roll_no);
@@ -55,7 +67,7 @@ void create_student()
 
     printf("Enter Name of the student : ");
     scanf(" %[^\n]%*c",ptr->name);
-    capatalize(ptr->name);
+    capitalize(ptr->name);
 
     printf("Enter Branch ID");
     scanf(" %[^\n]%*c",ptr->branch_id);
@@ -67,10 +79,8 @@ void create_student()
     }
 
     printf("Enter CGPA : ");
-    scanf("%f",ptr->cgpa);
+    scanf("%f", &(ptr->cgpa));
     
-    ptr->next = NULL;
-
     if(Student_head == NULL)
         Student_head = ptr;
     
@@ -86,19 +96,20 @@ void create_student()
 void create_University()
 {
     struct University* ptr = (struct University*) malloc(sizeof(struct University));
+    ptr->next = NULL;
 
     printf("Enter University ID");
     scanf(" %[^\n]%*c",ptr->univ_id);
     if(!validate_Unique_univid(ptr->univ_id))
     {
-        printf("This University ID does not exist. University not added.\n");
+        printf("This University ID already exist. University not added.\n");
         free(ptr);
         return;
     }
     
     printf("Enter Name of the University : ");
     scanf(" %[^\n]%*c",ptr->univ_name);
-    capatalize(ptr->univ_name);
+    capitalize(ptr->univ_name);
 
     printf("Enter Location of the University : ");
     scanf(" %[^\n]%*c",ptr->univ_location);
@@ -119,20 +130,21 @@ void create_University()
     }
 }
 
-void create_Branch(char branch_id[5], char univ_id[5], char branch_name[10])
+void create_Branch()
 {
     struct Branch* ptr = (struct Branch*) malloc(sizeof(struct Branch));
-    
-    printf("Enter Branch ID");
+    ptr->next = NULL;
+
+    printf("Enter Branch ID : ");
     scanf(" %[^\n]%*c",ptr->branch_id);
     if(!validate_Unique_branchid(ptr->branch_id))
     {
-        printf("This Branch ID alreadt exists. Branch not added.\n");
+        printf("This Branch ID already exists. Branch not added.\n");
         free(ptr);
         return;
     }
 
-    printf("Enter University ID");
+    printf("Enter University ID : ");
     scanf(" %[^\n]%*c",ptr->univ_id);
     if(!validate_existing_uni_id(ptr->univ_id))
     {
@@ -141,9 +153,9 @@ void create_Branch(char branch_id[5], char univ_id[5], char branch_name[10])
         return;
     }
     
-    printf("Enter Name of the Branh : ");
+    printf("Enter Name of the Branch : ");
     scanf(" %[^\n]%*c",ptr->branch_name);
-    capatalize(ptr->branch_name);
+    capitalize(ptr->branch_name);
        
 
     if(Branch_head == NULL)
@@ -158,7 +170,7 @@ void create_Branch(char branch_id[5], char univ_id[5], char branch_name[10])
     }
 }
 
-void capatalize(char * str)
+void capitalize(char * str)
 {
     for(int i =0;str[i];i++)
     {
@@ -173,7 +185,7 @@ int validate_Unique_rollno(int rollno)
     {
         if(temp->roll_no == rollno)
             return 0; 
-        temp = temp->name;
+        temp = temp->next;
     }
     return 1;
 }
@@ -192,7 +204,7 @@ int validate_Unique_univid(char * univid)
 
 int validate_Unique_branchid(char * branchid)
 {
-    struct Branch* temp = University_head;
+    struct Branch* temp = Branch_head;
     while(temp != NULL)
     {
         if(strcmp(temp->branch_id,branchid) == 0)
@@ -216,7 +228,7 @@ int validate_existing_uni_id(char* univid)
 
 int validate_existing_branchid(char * branchid)
 {
-    struct Branch* temp = University_head;
+    struct Branch* temp = Branch_head;
     while(temp != NULL)
     {
         if(strcmp(temp->branch_id,branchid) == 0)
@@ -224,4 +236,41 @@ int validate_existing_branchid(char * branchid)
         temp = temp->next;
     }
     return 0;
+}
+
+void display_student()
+{
+    struct Student* temp = Student_head;
+    while(temp != NULL)
+    {
+        printf("Roll number :  %d, Name : %s, Branch ID : %s, CGPA : %.2f\n", temp->roll_no, temp->name, temp->branch_id, temp->cgpa);
+        temp = temp->name;
+    }
+}
+
+void display_university()
+{
+    struct University* temp = University_head;
+    while(temp != NULL)
+    {
+        printf("University ID : %s, University Name : %s, University Location : %s, Year of Start : %d",temp->univ_id, temp->univ_name, temp->univ_location, temp->start_year);
+        temp = temp->next;
+    }
+}
+
+void display_branch()
+{
+    struct Branch* temp = Branch_head;
+    while(temp != NULL)
+    {
+        printf("Branch ID : %s, Unviersity ID : %s, Branch Name : %s\n",temp->branch_id, temp->univ_id, temp->branch_name);
+        temp = temp->next;
+    }
+}
+
+void delete_fail()
+{
+    struct Student* temp1 = Student_head;
+    struct Student* temp2 = fail_student_head;
+    
 }
