@@ -30,8 +30,8 @@ Implement the following modules/sub-modules using a menu-driven approach:
 - Display details of students attending **KIIT University** with the branch **CSE**.
 - Display the list of branches available in any given University.
 - Display University details in ascending order by their year of starting.
-- Display all student names/University names containing a given substring entered by the user.
-
+- Display all student names/University names containing a given substring entered by the user.<br>
+[Solution](./1.c)
 ---
 
 ## A-2

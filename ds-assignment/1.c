@@ -244,7 +244,7 @@ void display_student()
     while(temp != NULL)
     {
         printf("Roll number :  %d, Name : %s, Branch ID : %s, CGPA : %.2f\n", temp->roll_no, temp->name, temp->branch_id, temp->cgpa);
-        temp = temp->name;
+        temp = temp->next;
     }
 }
 
@@ -253,7 +253,7 @@ void display_university()
     struct University* temp = University_head;
     while(temp != NULL)
     {
-        printf("University ID : %s, University Name : %s, University Location : %s, Year of Start : %d",temp->univ_id, temp->univ_name, temp->univ_location, temp->start_year);
+        printf("University ID : %s, University Name : %s, University Location : %s, Year of Start : %d\n",temp->univ_id, temp->univ_name, temp->univ_location, temp->start_year);
         temp = temp->next;
     }
 }
@@ -271,6 +271,41 @@ void display_branch()
 void delete_fail()
 {
     struct Student* temp1 = Student_head;
-    struct Student* temp2 = fail_student_head;
+    struct Student* prev = NULL;
     
+    while(temp1 != NULL)
+    {
+        if(temp1->cgpa < 6.0)
+        {
+            if (fail_student_head == NULL)
+            {
+                fail_student_head = temp1;
+                temp1 = temp1->next;
+                fail_student_head->next = NULL;
+            }
+            else
+            {
+                struct Student* temp2 = fail_student_head;
+                while (temp2->next != NULL)
+                    temp2 = temp2->next;
+                temp2->next = temp1;
+                temp1 = temp1->next;
+                temp2->next->next = NULL;
+            }
+
+            if (prev == NULL) 
+            {
+                Student_head = temp1;
+            }
+            else
+            {
+                prev->next = temp1;
+            }
+        }
+        else
+        {
+            prev = temp1;
+            temp1 = temp1->next;
+        }
+    }
 }
