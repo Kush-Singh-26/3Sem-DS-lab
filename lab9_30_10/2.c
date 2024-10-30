@@ -1,4 +1,4 @@
-// Merge sort// Merge Sort
+// Merge sort
 #include<stdio.h>
 
 void merge_sort(int a[],int lb, int ub);
