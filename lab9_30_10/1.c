@@ -1,4 +1,3 @@
-//delete node in BST
 #include<stdio.h>
 #include<stdlib.h>
 
