@@ -32,7 +32,7 @@ Implement the following modules/sub-modules using a menu-driven approach:
 - Display University details in ascending order by their year of starting.
 - Display all student names/University names containing a given substring entered by the user.
 <br>
-[Solution](./1.c)
+[Solution](./1.c)  
 ---
 
 ## A-2
