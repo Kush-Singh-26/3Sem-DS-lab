@@ -30,7 +30,8 @@ Implement the following modules/sub-modules using a menu-driven approach:
 - Display details of students attending **KIIT University** with the branch **CSE**.
 - Display the list of branches available in any given University.
 - Display University details in ascending order by their year of starting.
-- Display all student names/University names containing a given substring entered by the user.<br>
+- Display all student names/University names containing a given substring entered by the user.
+<br>
 [Solution](./1.c)
 ---
 
@@ -91,14 +92,16 @@ Implement round-robin scheduling using a linked list, where each node represents
 
 ## A-6
 
-Write a program to construct a binary search tree (BST) from a given sequence of **preorder** and **inorder** traversal data.<br> [Solution](/ds-assignment/6.c)
-
+Write a program to construct a binary search tree (BST) from a given sequence of **preorder** and **inorder** traversal data.
+<br>
+[Solution](./6.c)
 ---
 
 ## A-7
 
 Write a program to check if the left subtree of a binary search tree is a mirror image of its right subtree.
-
+<br>
+[Solution](./7.c)
 ---
 
 ## A-8
