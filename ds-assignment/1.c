@@ -309,3 +309,59 @@ void delete_fail()
         }
     }
 }
+
+void display_kiit()
+{
+    struct Student* student_temp = Student_head;
+
+    while(student_temp != NULL)
+    {
+        struct Branch* branch_temp = Branch_head;
+        struct University* temp_uni = NULL;
+        while(branch_temp != NULL)
+        {
+            if(strcmp(student_temp->branch_id,branch_temp->branch_id) == 0)
+            {
+                temp_uni = University_head;
+                while(temp_uni != NULL)
+                {
+                    if(strcmp(temp_uni->univ_id,branch_temp->univ_id) == 0 && strcmp(temp_uni->univ_id, "KIIT") == 0)
+                    {
+                        printf("Roll number :  %d, Name : %s, Branch ID : %s, CGPA : %.2f\n", student_temp->roll_no, student_temp->name, student_temp->branch_id, student_temp->cgpa);
+                        break;
+                    }
+                    temp_uni = temp_uni->next;
+                }
+            }
+            branch_temp = branch_temp->next;
+        }
+        student_temp = student_temp->next;
+    }
+
+    struct Student* student_fail_temp = fail_student_head;
+
+    while(student_fail_temp != NULL)
+    {
+        struct Branch* branch_temp = Branch_head;
+        struct University* temp_uni = NULL;
+        while(branch_temp != NULL)
+        {
+            if(strcmp(student_fail_temp->branch_id,branch_temp->branch_id) == 0)
+            {
+                temp_uni = University_head;
+                while(temp_uni != NULL)
+                {
+                    if(strcmp(temp_uni->univ_id,branch_temp->univ_id) == 0 && strcmp(temp_uni->univ_id, "KIIT") == 0)
+                    {
+                        printf("Roll number :  %d, Name : %s, Branch ID : %s, CGPA : %.2f\n", student_fail_temp->roll_no, student_fail_temp->name, student_fail_temp->branch_id, student_fail_temp->cgpa);
+                        break;
+                    }
+                    temp_uni = temp_uni->next;
+                }
+            }
+            branch_temp = branch_temp->next;
+        }
+        student_fail_temp = student_fail_temp->next;
+    }
+
+}
