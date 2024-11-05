@@ -8,21 +8,10 @@ struct node
     struct node* lptr;
 } *root = NULL;
 
-struct q
-{
-    struct node* item;
-    struct q* next;
-} *f = NULL, *r = NULL;
-
-
 void create(int n);
 void preorder(struct node* root);
 void inorder(struct node* root);
 void postorder(struct node* root);
-void level_order_traversal(struct node* root);
-
-void insert_q(struct node* ele);
-struct node* delete();
 
 void delete_node(struct node* root,int n);
 void delete_degree_0(struct node* ptr,struct node* par,int n);
@@ -37,8 +26,7 @@ int main()
     printf("2. Preorder Traversal\n");
     printf("3. Inorder Traversal\n");
     printf("4. Postorder Traversal\n");
-    printf("5. Level order Traversal\n");
-    printf("6. Delete a node\n");
+    printf("5. Delete a node\n");
     printf("0. EXIT\n");
 
     int choice,data;
@@ -70,11 +58,6 @@ int main()
             break;
         
         case 5:
-            level_order_traversal(root);
-            printf("\n");
-            break;
-        
-        case 6:
             printf("Enter value to be deleted : ");
             scanf("%d",&data);
             delete_node(root,data);
@@ -148,60 +131,6 @@ void postorder(struct node* root)
         postorder(root->rptr);
         printf("%d ",root->data);
     }
-}
-
-void level_order_traversal(struct node* root)
-{
-    if(root == NULL) return;
-
-    insert_q(root);
-
-    while(f != NULL)
-    {
-        struct node* current = delete();
-
-        printf("%d ",current->data);
-        
-        if(current->lptr != NULL)
-            insert_q(current->lptr);
-        if(current->rptr != NULL)
-            insert_q(current->rptr);
-    }
-
-}
-
-void insert_q(struct node* ele)
-{
-    struct q* ptr = (struct q*) malloc(sizeof(struct q));
-    ptr->next = NULL;
-    ptr->item = ele;
-
-    if(f == NULL && r == NULL)
-    {
-        f = ptr;
-        r = ptr;
-    }
-    else
-    {
-        r->next = ptr;
-        r = r->next;
-    }
-}
-
-struct node* delete()
-{
-    if(f == NULL)
-        return NULL;
-    
-    struct q* temp = f;
-    struct node* item = f->item;
-    f = f->next;
-
-    if(f == NULL)
-        r = NULL;
-    
-    free(temp);
-    return item;
 }
 
 
