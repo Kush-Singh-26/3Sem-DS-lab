@@ -273,5 +273,10 @@ void delete_degree_2(struct node* ptr, int n)
 
     ptr->data = min->data;
 
-    delete_node(root,min->data);
+    if (par->lptr == min)
+        par->lptr = min->rptr;  
+    else
+        par->rptr = min->rptr;      
+
+    free(min);
 }
