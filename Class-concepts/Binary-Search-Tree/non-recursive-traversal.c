@@ -12,31 +12,35 @@ struct stac
 {
     struct node* ele;
     struct stac* next;
-} *st = NULL;
+} *st1 = NULL , *st2 = NULL;
 
 void create(int n);
 
 void preorder_iterative(struct node* root);
 void inorder_iterative(struct node* root);
+void postorder_iterative(struct node* root);
 
 void preorder(struct node* root);
 void inorder(struct node* root);
+void postorder(struct node* root);
 
-void push(struct node* n);
-struct node* pop();
+void push(struct node* n, struct stac** st);
+struct node* pop(struct stac** st);
 
 int main()
 {
     printf("1. Enter new data \n");
     printf("2. Preorder traversal\n");
     printf("3. Inorder Traversal\n");
-    printf("4. Preorder traversal recursive\n");
-    printf("5. Inorder Traversal recursive\n");
+    printf("4. Postorder Traversal\n");
+    printf("5. Preorder traversal recursive\n");
+    printf("6. Inorder Traversal recursive\n");
+    printf("7. Postorder Traversal recursive\n");
     printf("0. EXIT\n");
     int choice,n;
     do
     {
-        printf("Enter your choice :");
+        printf("Enter your choice : ");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -53,14 +57,23 @@ int main()
             case 3:
                 inorder_iterative(root);
                 break;
-
+            
             case 4:
+                postorder_iterative(root);
+                break;
+
+            case 5:
                 preorder(root);
                 printf("\n");
                 break;
             
-            case 5:
+            case 6:
                 inorder(root);
+                printf("\n");
+                break;
+
+            case 7:
+                postorder(root);
                 printf("\n");
                 break;
 
@@ -108,41 +121,67 @@ void create(int n)
 
 void preorder_iterative(struct node* root)
 {
+    if(root == NULL) return;
     struct node* current = root;
-    while(current != NULL || st != NULL)
+    while(current != NULL || st1 != NULL)
     {
         while(current != NULL)
         {
             printf("%d ",current->data);
             if(current->right != NULL)
-                push(current->right);
+                push(current->right,&st1);
             current = current->left;
         }
 
-        if(st != NULL)
-            current = pop();
+        if(st1 != NULL)
+            current = pop(&st1);
     }
     printf("\n");
 }
 
 void inorder_iterative(struct node* root)
 {
+    if(root == NULL) return;
     struct node* current = root;
-    while(current != NULL || st != NULL)
+    while(current != NULL || st1 != NULL)
     {
 
         if(current != NULL)
         {
-            push(current);
+            push(current,&st1);
             current = current->left;
         }
 
         else
         {
-            current = pop();
+            current = pop(&st1);
             printf("%d ",current->data);
             current = current->right;
         }
+    }
+    printf("\n");
+}
+
+void postorder_iterative(struct node* root)
+{
+    if(root == NULL) return;
+    struct node* temp = NULL;
+    push(root,&st1);
+    while(st1 != NULL)
+    {
+        temp = pop(&st1);
+        push(temp,&st2);
+
+        if(temp->left) 
+            push(temp->left,&st1);
+        if(temp->right)
+            push(temp->right,&st1);
+    }
+
+    while(st2 != NULL)
+    {
+        temp = pop(&st2);
+        printf("%d ",temp->data);
     }
     printf("\n");
 }
@@ -167,20 +206,30 @@ void inorder(struct node* root)
     }
 }
 
-void push(struct node* n)
+void postorder(struct node* root)
+{
+    if(root != NULL)
+    {
+        postorder(root->left);
+        postorder(root->right);
+        printf("%d ",root->data);
+    }
+}
+
+void push(struct node* n, struct stac** st)
 {
     struct stac* ptr = (struct stac*)malloc(sizeof(struct stac));
     ptr->ele = n;
-    ptr->next = st;
-    st = ptr;
+    ptr->next = *st;
+    *st = ptr;
 }
 
-struct node* pop()
+struct node* pop(struct stac** st)
 {
-    if(st == NULL) return NULL;
-    struct node* node = st->ele;
-    struct stac* temp = st;
-    st = st->next;
+    if(*st == NULL) return NULL;
+    struct node* node = (*st)->ele;
+    struct stac* temp = *st;
+    *st = (*st)->next;
     free(temp);
     return node;
 }
