@@ -107,7 +107,8 @@ Write a program to check if the left subtree of a binary search tree is a mirror
 ## A-8
 
 Implement a graph ADT using a linked list and traverse it using **breadth-first search (BFS)** and **depth-first search (DFS)** from a specified node.
-
+<br>
+[Solution](./8.c)
 ---
 
 ## A-9
@@ -119,3 +120,6 @@ Assume ATM locations for different banks are represented by nodes in a graph wit
 ## A-10
 
 Write a program to convert a postfix expression to its equivalent prefix expression by constructing an expression tree.
+<br>
+[Solution](10.c)
+---
