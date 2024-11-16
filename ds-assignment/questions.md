@@ -87,7 +87,8 @@ Write a program to implement **four double-ended queues (D-queues)** in an array
 ## A-5
 
 Implement round-robin scheduling using a linked list, where each node represents a process with attributes **<PID, CPU_time>**. A time quantum **T** is provided by the user. Each process runs for time **T**, updating **CPU_time** to **CPU_time - T**. The current process node is deleted from the beginning and added to the end of the list. If **CPU_time** ≤ 0, the process is deleted. Processes are executed based on user choice until all nodes are deleted.
-
+<br>
+[Solution](./5.c)
 ---
 
 ## A-6
