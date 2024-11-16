@@ -68,7 +68,13 @@ Modules:
 
 ## A-3
 
-At a vaccination center, people make a queue. Due to space constraints, parallel queues are formed after the first queue is full, up to three queues. Queue size will be user-defined.
+In a vaccination centre people make queue. But due to unavailability of space in the
+same queue, people make a parallel queue (second queue following the first one), then
+people make another parallel queue (third queue following the second one) and further
+no queues can be made due to unavailability of space. The case has been shown
+diagrammatically below. The arrow shows the direction in which people can be added.
+The box shows the space available for waiting. The size of the three boxes is equal,
+where the size will be decided by the user.
 
 <img src ="./img/img-3.png">
 Modules:
@@ -81,7 +87,8 @@ Modules:
 ## A-4
 
 Write a program to implement **four double-ended queues (D-queues)** in an array.
-
+<br>
+[Solution](./4.c)
 ---
 
 ## A-5
