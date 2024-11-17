@@ -1,0 +1,92 @@
+DEFINE CONSTANTS:
+    MAX_NODES ← Maximum number of nodes
+    INF ← Large value representing infinity
+
+STRUCTURES:
+    ATM: { id, bank_id, city_id, location_id }
+    Edge: { node, distance }
+    Queue: { front, rear, size, data[MAX_NODES] }
+
+INITIALIZE:
+    graph[MAX_NODES][MAX_NODES] ← Adjacency list for edges
+    edge_count[MAX_NODES] ← Array to store neighbor count for each node
+    atms[MAX_NODES] ← Array to store ATM metadata
+
+FUNCTION initializeQueue(queue):
+    queue.front ← 0
+    queue.rear ← 0
+    queue.size ← 0
+
+FUNCTION isQueueEmpty(queue):
+    RETURN queue.size == 0
+
+FUNCTION enqueue(queue, value):
+    queue.data[queue.rear] ← value
+    queue.rear ← (queue.rear + 1) MOD MAX_NODES
+    queue.size ← queue.size + 1
+
+FUNCTION dequeue(queue):
+    value ← queue.data[queue.front]
+    queue.front ← (queue.front + 1) MOD MAX_NODES
+    queue.size ← queue.size - 1
+    RETURN value
+
+FUNCTION findNearestATMs(start_location, bank_id, k):
+    INITIALIZE queue
+    initializeQueue(queue)
+    enqueue(queue, start_location)
+
+    visited[MAX_NODES] ← FALSE for all nodes
+    result[MAX_NODES] ← EMPTY
+    result_count ← 0
+
+    visited[start_location] ← TRUE
+
+    WHILE queue is not empty AND result_count < k:
+        current ← dequeue(queue)
+
+        IF atms[current].bank_id == bank_id:
+            ADD current to result
+            result_count ← result_count + 1
+
+        FOR each neighbor of current:
+            neighbor ← graph[current][neighbor_index].node
+            IF visited[neighbor] == FALSE:
+                visited[neighbor] ← TRUE
+                enqueue(queue, neighbor)
+
+    PRINT "Nearest k ATMs of the given bank:"
+    FOR each ATM in result:
+        PRINT ATM details
+
+FUNCTION main():
+    num_nodes ← Number of nodes
+    INITIALIZE graph, edge_count, and atms metadata
+    ADD edges to graph
+
+    CALL findNearestATMs(start_location, bank_id, k)
+
+
+Steps:
+
+    Initialize Data Structures:
+        Create an empty queue Q to perform BFS traversal.
+        Create an array visited of size equal to the number of nodes, initialized to false.
+        Create an empty list result to store the nearest ATMs.
+
+    Start BFS Traversal:
+        Mark start_location as visited by setting visited[start_location] = true.
+        Enqueue start_location into Q.
+
+    Perform BFS Until Q is Empty or k ATMs are Found:
+        While Q is not empty and the size of result is less than k:
+            Dequeue a node current from Q.
+            Check if the ATM at current belongs to the desired bank_id:
+                If true, append current to result.
+            For each neighbor neighbor of current:
+                If neighbor is not visited:
+                    Mark neighbor as visited.
+                    Enqueue neighbor into Q.
+
+    Output the Result:
+        Return the list result, containing up to k nearest ATMs of the specified bank.
