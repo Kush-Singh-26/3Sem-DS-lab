@@ -122,7 +122,8 @@ Implement a graph ADT using a linked list and traverse it using **breadth-first 
 ## A-9
 
 Assume ATM locations for different banks are represented by nodes in a graph with information **<ATM ID, BANK ID, CITY ID, LOCATION ID>**. Write pseudocode/algorithm to find the nearest ATM of a specific bank from a given location. Find subsequent neighboring ATMs as per user request.
-
+<br>
+[Solution](./9.txt)
 ---
 
 ## A-10
