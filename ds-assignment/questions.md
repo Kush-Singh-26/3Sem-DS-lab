@@ -63,7 +63,8 @@ Modules:
 - Add new customers and items.
 - Delete customers if the last transaction date is over a year ago.
 - Show items out of stock during purchase.
-
+<br>
+[Solution](./2.c)
 ---
 
 ## A-3
@@ -81,7 +82,8 @@ Modules:
 
 - Implement queue operations (insertion and deletion). When the first person enters the center, all people move one step forward.
 - Handle scenarios when no one is in line for a vaccine and when no more people can be added due to lack of space.
-
+<br>
+[Solution](./3.c)
 ---
 
 ## A-4
